@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="jquery-1.11.3.js"></script>
-    <script src="jquery-ui.js"></script>
-    <script src='application.js'></script>
-    <link rel="stylesheet" href="style.css" />
+<head>
+  <script src="jquery-1.11.3.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script src='application.js'></script>
+  <link rel="stylesheet" href="style.css" />
   
-    <title>Darts Scorer</title>
-  </head>
+  <title>Darts Scorer</title>
+</head>
 
-  <body>
-    <div class="scoreInput">
-      <form id="addToListForm">
-          <div class="player1Input">
-            <input type="hidden" name="player1Score" id="player1Score" value="501">
-            <span class="scoreInput inputspan1">
-              <input type="text" name="listItemInput1" id="listItemInput1" class="listItemInput1" placeholder=" Enter Score" autocomplete="off" />
-              <input type="button" class="addToList btnPlayer1" value="Enter" data-player-id="1"/>
-            </span>
-            </div>
-            <div class="player2Input">
-            <input type="hidden" name="player2Score" id="player2Score" value="501">
-            <span class="scoreInput inputspan2">
-              <input type="text" name="listItemInput2" id="listItemInput2" class="listItemInput2" placeholder=" Enter Score" autocomplete="off" data-player-id="2"/>
-              <input type="button" class="addToList btnPlayer2" value="Enter" data-player-id="2"/>
-            </span>
-          </div>
-      </form>
-    </div>
-    
-    <div class="playerInfo">
-      <div class="introBlurb">
+<body>
+  <div class="scoreInput">
+    <form id="addToListForm">
+      <div class="player1Input">
+        <input type="hidden" name="player1Score" id="player1Score" value="501">
+        <span class="scoreInput inputspan1">
+          <input type="text" name="listItemInput1" id="listItemInput1" class="listItemInput1" placeholder=" Enter Score" autocomplete="off" />
+          <input type="button" class="addToList btnPlayer1" value="Enter" data-player-id="1"/>
+        </span>
+      </div>
+      <div class="player2Input">
+        <input type="hidden" name="player2Score" id="player2Score" value="501">
+        <span class="scoreInput inputspan2">
+          <input type="text" name="listItemInput2" id="listItemInput2" class="listItemInput2" placeholder=" Enter Score" autocomplete="off" data-player-id="2"/>
+          <input type="button" class="addToList btnPlayer2" value="Enter" data-player-id="2"/>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="playerInfo">
+    <div class="introBlurb">
       <p>Welcome to our simple dart scorer app</p>
       <p>Enter the names of each player/team:</p>
-        <input type="text" name="player1Name" id="player1Name" class="playerName" placeholder="Player 1" autocomplete="off" data-player-id="1"/>
-        <input type="text" name="player2Name" id="player2Name" class="playerName" placeholder="Player 2" autocomplete="off" data-player-id="1"/>
+      <input type="text" name="player1Name" id="player1Name" class="playerName" placeholder="Player 1" autocomplete="off" data-player-id="1"/>
+      <input type="text" name="player2Name" id="player2Name" class="playerName" placeholder="Player 2" autocomplete="off" data-player-id="1"/>
       <br>
       <span class="radioList">
         <label>Start Score: </label>
-          301 <input type="radio" name="startScore" value="301">
-          501 <input type="radio" name="startScore" value="501" checked="checked">
-          701 <input type="radio" name="startScore" value="701">
-          1001 <input type="radio" name="startScore" value="1001">
+        301 <input type="radio" name="startScore" value="301">
+        501 <input type="radio" name="startScore" value="501" checked="checked">
+        701 <input type="radio" name="startScore" value="701">
+        1001 <input type="radio" name="startScore" value="1001">
       </span>
       <br>
       <span class="radioList">
@@ -50,37 +50,62 @@
         On <input type="radio" name="sounds" value="on">
       </span>
       <br>
-      <input type="button" class="btnStartGame btnGameStart" value="Start Game"/> 
-      </div>  
-    </div>
-    
-    <audio id='gameon'><source src="sounds/gameon.wav" type="audio/wav"></audio>
-
-    <div class="newGame">
-      <span class="radioList">
-      <input type="button" class="btnNewGame btnGameStart" value="New Game"/>
-        Same Players <input type="radio" name="newGamePlayers" value="same" checked="checked">
-        Different Players <input type="radio" name="newGamePlayers" value="new" checked="checked">
+      <span class="radiolist">
+        Single Game <input type="radio" name="match" value="singleGame" checked="checked">
+        Matchplay <input type="radio" name="match" value="matchPlay">
+        Set Play <input type="radio" name="match" value="setPlay">
+      </span>
+      <div class="matchPlaySettings">
+        <span>
+          <label>How many legs required to win: </label>
+          <input type="text" name="numLegs" id="numLegs" class="inputNum"/>
         </span>
-    </div>
-    
-    <div class="scores">
-
-      <div class="scoreHeader">
-        <label id="lblStartScore">501</label>
       </div>
+      <div class="setPlaySettings">
+        <span>
+          <label>Best of how many sets: </label>
+          <input type="text" name="numSets" id="numSets" class="inputNum" />
+        </span>
+        <br>
+        <span class="radioList">
+          <label>How many legs per set: </label>
+          3 <input type="radio" name="legsPerSet" value="3">
+          5 <input type="radio" name="legsPerSet" value="5" checked="checked">
+          7 <input type="radio" name="legsPerSet" value="7">
+        </span>
+      </div>
+      <br>
+      <input type="button" class="btnStartGame btnGameStart" value="Start Game"/> 
+    </div>  
+  </div>
 
-      <table class="scoreTable">
-        <thead>
-          <tr class="trPlayerHeader">
-            <td class="thPlayer1Name">
-                <label class="currentScore scoreboardItem" id="lblPlayer1Name">Player 1</label>
-            </td>
-            <td class="thPlayer2Name">
-                <label class="currentScore scoreboardItem" id="lblPlayer2Name">Player 2</label>
-            </td>
-          </thead>
-          <tbody>
+  <audio id='gameon'><source src="sounds/gameon.wav" type="audio/wav"></audio>
+
+  <div class="newGame">
+    <span class="radioList">
+      <input type="button" class="btnNewGame btnGameStart" value="New Game"/>
+      Same Players <input type="radio" name="newGamePlayers" value="same" checked="checked">
+      Different Players <input type="radio" name="newGamePlayers" value="new" checked="checked">
+    </span>
+  </div>
+
+  <div class="scores">
+
+    <div class="scoreHeader">
+      <label id="lblStartScore">501</label>
+    </div>
+
+    <table class="scoreTable">
+      <thead>
+        <tr class="trPlayerHeader">
+          <td class="thPlayer1Name">
+            <label class="currentScore scoreboardItem" id="lblPlayer1Name">Player 1</label>
+          </td>
+          <td class="thPlayer2Name">
+            <label class="currentScore scoreboardItem" id="lblPlayer2Name">Player 2</label>
+          </td>
+        </thead>
+        <tbody>
           <tr class="trScores">
             <td class="thScore thPlayerScore">
               <ul id="pl1scores">
@@ -93,7 +118,7 @@
           </tr>
         </tbody>
       </table>
-  </div>
+    </div>
 
   </body>
-</html>
+  </html>

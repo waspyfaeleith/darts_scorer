@@ -1,5 +1,24 @@
 $(function() {
-  
+  var gameType = 'singleGame';
+  var numberOfLegs;
+  var legsPerSet;
+  var numberOfSets;
+
+  var p1LegsWon;
+  var p1SetsWon;
+  var p2LegsWon;
+  var p2SetsWon;
+
+  function setWon()
+  {
+    
+  }
+
+  function matchWon()
+  {
+
+  }
+
   function callScore(score)
   {
     if ($("input:radio[name='sounds']:checked").val() == 'on')
@@ -39,6 +58,8 @@ $(function() {
   $('.scoreInput').hide();
   $('.scores').hide();
   $('.newGame').hide();
+  $('.matchPlaySettings').hide();
+  $('.setPlaySettings').hide();
 
   $('.listItemInput').focus();
   var $listItems;
@@ -115,24 +136,27 @@ $(function() {
     sound.play();
   }
 
+  $('input[type=radio][name=match]').change(function() {
+    console.log(this.value);
+    if (this.value == 'matchPlay') {
+      $('.matchPlaySettings').show();
+      $('.setPlaySettings').hide();
+      gameType = 'matchPlay';
+
+    }
+    else if (this.value == 'setPlay') {
+      $('.setPlaySettings').show();
+      $('.matchPlaySettings').hide();
+      gameType = 'setPlay';
+    }
+    else {
+      $('.matchPlaySettings').hide();
+      $('.setPlaySettings').hide();
+      gameType = 'singleGame';
+    }
+  });
+
   $('.btnStartGame').click(function(e) {
-    /*var startScore = $("input:radio[name='startScore']:checked").val();
-    
-    $('#lblStartScore').text(startScore);
-    $('#player1Score').val(startScore);
-    $('#player2Score').val(startScore);
-
-    var player1Name = $('#player1Name').val() != 0 ? $('#player1Name').val() : "Player 1";
-    var player2Name = $('#player2Name').val() != 0 ? $('#player2Name').val() : "Player 2";
-    $('#lblPlayer1Name').text(player1Name);
-    $('#lblPlayer2Name').text(player2Name);
-
-    $('.playerInfo').hide();
-    $('.scoreInput').show();
-    $('.scores').show();
-    alert("GAME ON!");
-    var sound = document.getElementById("gameon"); 
-    sound.play();*/
     $('.playerInfo').hide();
     $('.scoreInput').show();
     $('.scores').show();
@@ -184,7 +208,9 @@ $(function() {
       if (weHaveAWinner(newScore,playerId))
       {
         itemToAdd = "Game Shot!";
-        newGame();
+        if (gameType == 'singleGame') {
+          newGame();
+        }
       }
       if (itemToAdd) {
         $listItems.children('li:last-child').addClass("strikeThrough");
